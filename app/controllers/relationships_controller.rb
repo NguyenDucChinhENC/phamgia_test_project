@@ -4,6 +4,7 @@ class RelationshipsController < ApplicationController
 		if followed == nil
 			relationship = current_user.relationships.new relationship_params
 			if relationship.save
+				redirect_back(:fallback_location => foreman_tasks_task_path(task))
 			end
 		end
 	end
@@ -12,6 +13,7 @@ class RelationshipsController < ApplicationController
 		followed = Relationship.find_by id: params[:followed][:id]
 		if followed != nil
 			followed.destroy
+			redirect_back(:fallback_location => foreman_tasks_task_path(task))
 		end
 	end
 

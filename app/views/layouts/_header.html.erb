@@ -30,6 +30,7 @@
             <li><a href="#">Contact</a></li> -->
             <% if user_signed_in?%>
             <li><a class="navbar-brand"><%= link_to "Profile", user_path_url(current_user) %></a></li>
+            <li><a class="navbar-brand"><%= link_to "Wall", posts_path %></a></li>
             <li><a class="navbar-brand"><%= link_to "New Post", new_post_path %></a></li>
 	            <li>
                 <%= link_to t(".log_out"), destroy_user_session_path, method: :delete %>
