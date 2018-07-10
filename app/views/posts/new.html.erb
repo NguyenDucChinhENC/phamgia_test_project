@@ -1,0 +1,30 @@
+	<body class="background">
+	<h3 style="color: white">Status Upload</h3>
+
+	<div class="row post-box">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="widget-area no-padding blank">
+					<div class="status-upload">
+							<%= form_for :post, url: posts_path do |f| %>
+								<%= f.text_field :title, class: "input", placeholder: "Title" %>
+				        <%= f.text_area :body, class: "textarea", placeholder: "What are you doing right now?" %>
+				        
+				      
+							<!-- <ul>
+								<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
+								<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
+								<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
+								<li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
+							</ul> -->
+<!-- 
+							<div> -->
+				          <%= f.submit "Post", :class => 'btn_sign_up'%>
+				        <!-- </div> -->
+							<% end %>
+					</div><!-- Status Upload  -->
+				</div><!-- Widget Area -->
+			</div>
+			</div>
+			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	</div><!-- / .page-container -->
+</body>

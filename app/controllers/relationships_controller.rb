@@ -10,12 +10,13 @@ class RelationshipsController < ApplicationController
 
 	def destroy
 		followed = Relationship.find_by id: params[:followed][:id]
-		byebug
 		if followed != nil
 			followed.destroy
 		end
 	end
 
+	private
+	
 	def relationship_params
 		params.require(:follow).permit Relationship::ATTRIBUTES_PARAMS
 	end
