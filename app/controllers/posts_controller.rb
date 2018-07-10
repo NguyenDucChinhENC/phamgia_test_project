@@ -1,4 +1,20 @@
 class PostsController < ApplicationController
+
+  def index
+    if user_signed_in?
+      all_relationships = current_user.relationships
+      if all_relationships
+        @posts = []
+        all_relationships.each do |relationship|
+          user = User.find_by id: relationship.monitored_id
+          user.posts.each do |post|
+            @posts.push post_serializer post
+          end
+        end
+      end
+    end
+  end
+
   def new
   end
 
