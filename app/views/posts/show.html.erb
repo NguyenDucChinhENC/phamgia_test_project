@@ -1,89 +1,191 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<!-- meta tags -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <!-- meta tags -->
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
-<!-- ugarit css -->
-<!-- <link href="ugarit.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css">
+  <!-- ugarit css -->
+  <!-- <link href="ugarit.css" rel="stylesheet"> -->
+  <style class="cp-pen-styles">html, body {
+    
+  }
 
-</head>
+  input, textarea {
+    outline: none;
+    border: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    font-family: "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
+    font-size: 1rem;
+    color: #555f77;
+  }
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: #ced2db;
+  }
+  input::-moz-placeholder, textarea::-moz-placeholder {
+    color: #ced2db;
+  }
+  input:-moz-placeholder, textarea:-moz-placeholder {
+    color: #ced2db;
+  }
+  input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color: #ced2db;
+  }
 
-<body class="background">
 
-<!-- page -->
-<div class="page-container">
-  <!-- ======================
-   left side
-  ======================= -->
-  <div class="left-side">
-    <!-- brand -->
-    <div class="brand" style="padding-right: 10px;
-  padding-left: 10px;">
-      <h2><%= @post.title %></h2>
-      <h4></h4>
+
+  .comments {
+    margin: 2.5rem auto 0;
+    max-width: 60.75rem;
+    padding: 0 1.25rem;
+  }
+
+  .comment-wrap {
+    margin-bottom: 1.25rem;
+    display: table;
+    width: 100%;
+    min-height: 5.3125rem;
+  }
+
+  .photo {
+    padding-top: 0.625rem;
+    display: table-cell;
+    width: 3.5rem;
+  }
+  .photo .avatar {
+    height: 2.25rem;
+    width: 2.25rem;
+    border-radius: 50%;
+    background-size: contain;
+  }
+
+  .comment-block {
+    padding: 1rem;
+    background-color: #fff;
+    display: table-cell;
+    vertical-align: top;
+    border-radius: 0.1875rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+  }
+  .comment-block textarea {
+    width: 100%;
+    resize: none;
+  }
+
+  .comment-text {
+    margin-bottom: 1.25rem;
+  }
+
+  .bottom-comment {
+    color: #acb4c2;
+    font-size: 0.875rem;
+  }
+
+  .comment-date {
+    float: left;
+  }
+
+  .comment-actions {
+    float: right;
+  }
+  .comment-actions li {
+    display: inline;
+    margin: -2px;
+    cursor: pointer;
+  }
+  .comment-actions li.complain {
+    padding-right: 0.75rem;
+    border-right: 1px solid #e1e5eb;
+  }
+  .comment-actions li.reply {
+    padding-left: 0.75rem;
+    padding-right: 0.125rem;
+  }
+  .comment-actions li:hover {
+    color: #0095ff;
+  }
+  </style>
+
+  </head>
+
+  <body class="background">
+
+  <!-- page -->
+  <div class="page-container">
+    <!-- ======================
+     left side
+    ======================= -->
+    <div class="left-side">
+      <!-- brand -->
+      <div class="brand" style="padding-right: 10px;
+    padding-left: 10px;">
+        <h2><%= @post.title %></h2>
+        <h4></h4>
+        <br>
+        <p><%= @post.body %></p>
+        <p><%= @post.body %></p>
+
+      </div>
+    </div><!-- / .left-side -->
+    
+    <!-- ======================
+     right side
+    ======================= -->
+    <div class="right-side">
+      <!-- wall -->
+      <div class="wall" data-simplebar>
+  <div class="comments">
+      <div class="comment-wrap">
+          
+          <div class="comment-block">
+            <%= form_for :comment, url: comments_path do |f| %>
+                <%= f.hidden_field :post_id, value: @post.id %>
+                <%= f.text_area :body, class: "textarea", placeholder: "Add comment..., enter to complete.", cols: "30", id: "comment-box", rows: "3" %>
+                <%end%>
+          </div>
+      </div>
+      <hr>
       <br>
-      <p><%= @post.body %></p>
-      <p><%= @post.body %></p>
+      <% @comments.each do |comment| %>
+      <div class="comment-wrap">
+          
+          <div class="comment-block">
+              <p class="comment-text"><%= comment.body %></p>
+              <div class="bottom-comment">
+                  <div class="comment-date"><%= time_ago_in_words(comment.created_at) %> ago</div>
+                  <ul class="comment-actions">
+                      <li class="complain">Complain</li>
+                      <li class="reply">Reply</li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <% end %>
+  </div>
 
-    </div>
-  </div><!-- / .left-side -->
-  
-  <!-- ======================
-   right side
-  ======================= -->
-  <div class="right-side">
-    <!-- wall -->
-    <div class="wall" data-simplebar>
-      
-      <!-- ======================
-       intro
-      ======================= -->
-      <div class="section intro" id="intro">
-        <h2>Intro/summary</h2>
-        <p>Scroll down for more details</p>  
-        <p>recommendation: tell user that this part is scrollable</p>
-        <i class="fa fa-angle-double-down"></i>  
-      </div><!-- / .intro -->
-      
-      <!-- ======================
-       section
-      ======================= -->
-      <div class="section" id="#">
-        <h2>More Information</h2>
-        <p>Scroll down</p>  
-        <p>you may use different bg-color or <a href="https://tympanus.net/codrops/2013/10/03/a-collection-of-separator-styles/">Separators</a> to divide sections</p>  
-      </div><!-- / .sections -->
+  </body></html>
+    
+      </div><!-- / .wall -->
+    </div><!-- / .left-side -->
 
-      <!-- ======================
-       section
-      ======================= -->
-      <div class="section" id="#">
-        <h2>Last Section</h2>
-        <p>no more scrolling.</p>
-        <a href="#">
-          <p>Demo(working on one!)</p>
-        </a>
-        <a href="https://github.com/alphadsy/alpha-ui">
-          <p>Report Issue & Join Us on Github.</p>
-        </a>
-        <a href="https://github.com/alphadsy">
-          <p>More Free Layouts & UI.</p>
-        </a>
-      </div><!-- / .section -->
+  </div><!-- / .page-container -->
 
-    </div><!-- / .wall -->
-  </div><!-- / .left-side -->
+  <!-- JavaScript -->
+  <!-- jQuery v3.2 -->
+  <script>
+  $('#comment-box').keypress(function(e){
+      if(e.which == 13){
+           $(this).closest('form').submit();
+       }
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <!-- bootstrap 4 js -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script><!-- simplebar -->
+  <script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.js"></script>
 
-</div><!-- / .page-container -->
-
-<!-- JavaScript -->
-<!-- jQuery v3.2 -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<!-- bootstrap 4 js -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script><!-- simplebar -->
-<script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.js"></script>
-
-</body>
-</html>
+  </body>
+  </html>
