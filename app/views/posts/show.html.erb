@@ -122,11 +122,13 @@
       <!-- brand -->
       <div class="brand" style="padding-right: 10px;
     padding-left: 10px;">
-        <h2><%= @post.title %></h2>
+        <h2><%= @post[:title] %></h2>
         <h4></h4>
         <br>
-        <p><%= @post.body %></p>
-        <p><%= @post.body %></p>
+        <p><%= @post[:body] %></p>
+        <p style = "float: right;">By: <%= link_to @post[:user_name], user_path_url(@post[:user_id]) %><%=  %>
+          | <%= time_ago_in_words(@post[:created_at]) %> ago
+        </p>
 
       </div>
     </div><!-- / .left-side -->
@@ -142,22 +144,22 @@
           
           <div class="comment-block">
             <%= form_for :comment, url: comments_path do |f| %>
-                <%= f.hidden_field :post_id, value: @post.id %>
+                <%= f.hidden_field :post_id, value: @post[:id] %>
                 <%= f.text_area :body, class: "textarea", placeholder: "Add comment..., enter to complete.", cols: "30", id: "comment-box", rows: "3" %>
                 <%end%>
           </div>
       </div>
       <hr>
       <br>
-      <% @comments.each do |comment| %>
+      <% @comments_serializer.each do |comment| %>
       <div class="comment-wrap">
           
           <div class="comment-block">
-              <p class="comment-text"><%= comment.body %></p>
+              <p class="comment-text"><%= comment[:body] %></p>
               <div class="bottom-comment">
-                  <div class="comment-date"><%= time_ago_in_words(comment.created_at) %> ago</div>
+                  <div class="comment-date"><%= time_ago_in_words(comment[:created_at]) %> ago</div>
                   <ul class="comment-actions">
-                      <li class="complain">Complain</li>
+                      <li class="complain">By: <%= link_to comment[:user_name], user_path_url(comment[:user_id]) %></li>
                       <li class="reply">Reply</li>
                   </ul>
               </div>
