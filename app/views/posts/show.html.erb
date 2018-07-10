@@ -19,27 +19,13 @@
   ======================= -->
   <div class="left-side">
     <!-- brand -->
-    <div class="brand">
-      <h2><%= @user.name %></h2>
-      <h4>main information section.</h4>
-      <p>you can use color-bg image-bg carousel-bg...</p>
-      <% if user_signed_in? && current_user.id != @user.id%>
-      <% if !@followed %>
-      <%= form_for :follow, url: relationships_path do |f| %>
-        <%= f.hidden_field :monitored_id, value: @user.id %>
-        <div>
-          <%= f.submit "Follow", :class => 'btn_sign_up'%>
-        </div>
-      <% end %>
-      <% else %>
-      <%= form_for :followed, url: relationship_path, method: :delete do |f| %>
-        <%= f.hidden_field :id, value: @followed.id %>
-        <div>
-          <%= f.submit "Unfollow", :class => 'btn_sign_up'%>
-        </div>
-      <% end %>
-      <%end%>
-      <% end %>
+    <div class="brand" style="padding-right: 10px;
+  padding-left: 10px;">
+      <h2><%= @post.title %></h2>
+      <h4></h4>
+      <br>
+      <p><%= @post.body %></p>
+      <p><%= @post.body %></p>
 
     </div>
   </div><!-- / .left-side -->
@@ -50,20 +36,7 @@
   <div class="right-side">
     <!-- wall -->
     <div class="wall" data-simplebar>
-      <% @posts.each do |post| %>
-      <div class="text-center" padding: 3px>
-                    <div class="box">
-                        <div class="box-content">
-                            <h1 class="tag-title"><%= post.title %></h1>
-                            <hr />
-                            <p><%= post.body %></p>
-                            <br />
-                            <%= link_to "more", post_path(post) %>
-                            <a class="btn btn-block btn-primary">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-      <% end %>
+      
       <!-- ======================
        intro
       ======================= -->
