@@ -1,0 +1,6 @@
+<%= form_for :followed, url: relationship_path(@relationship.id),  method: :delete, remote: true do |f| %>
+    <%= f.hidden_field :id, value: @relationship.id %>
+    <div>
+    	<%= f.submit "Unfollow", :class => 'btn_sign_up'%>
+    </div>
+    <% end %>

@@ -142,32 +142,7 @@
       <!-- wall -->
       <div class="wall" data-simplebar>
   <div class="comments">
-      <div class="comment-wrap">
-          
-          <div class="comment-block">
-            <%= form_for :comment, url: comments_path do |f| %>
-                <%= f.hidden_field :post_id, value: @post[:id] %>
-                <%= f.text_area :body, class: "textarea", placeholder: "Add comment..., enter to complete.", cols: "30", id: "comment-box", rows: "3" %>
-                <%end%>
-          </div>
-      </div>
-      <hr>
-      <br>
-      <% @comments_serializer.each do |comment| %>
-      <div class="comment-wrap">
-          
-          <div class="comment-block">
-              <p class="comment-text"><%= comment[:body] %></p>
-              <div class="bottom-comment">
-                  <div class="comment-date"><%= time_ago_in_words(comment[:created_at]) %> ago</div>
-                  <ul class="comment-actions">
-                      <li class="complain">By: <%= link_to comment[:user_name], user_path_url(comment[:user_id]) %></li>
-                      <li class="reply">Reply</li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-      <% end %>
+      <%= render "comment_form" %>
   </div>
 
   </body></html>

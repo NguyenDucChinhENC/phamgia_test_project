@@ -1,0 +1,6 @@
+<%= form_for :follow, url: relationships_path, remote: true do |f| %>
+	<%= f.hidden_field :monitored_id, value: @user.id %>
+	<div>
+	  <%= f.submit "Follow", :class => 'btn_sign_up'%>
+	</div>
+<% end %>
