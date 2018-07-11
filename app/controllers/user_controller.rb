@@ -3,12 +3,8 @@ class UserController < ApplicationController
   	@user = User.find_by id: params[:id]
     @posts = @user.posts
   	if user_signed_in?
-  		temp = current_user.relationships.find_by monitored_id: @user.id
-  		if temp != nil 
-  			@followed = temp
-  		else 
-  			@followed = false 
-  		end
+  		@relationship = current_user.relationships.find_by monitored_id: @user.id
+  		@relationship? @followed = @relationship : @followed = false 
   	end
   end
 end

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'user/:id', to: "user#show", as: 'user_path'
-  resources :relationships, only: [:create, :destroy]
+  root "posts#index"
+  resources :relationships
   resources :posts, only: [:index, :new, :create, :show]
   resources :comments, only: [:create]
   # devise_for :users

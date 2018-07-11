@@ -24,21 +24,7 @@
       <h4>main information section.</h4>
       <p>you can use color-bg image-bg carousel-bg...</p>
       <% if user_signed_in? && current_user.id != @user.id%>
-      <% if !@followed %>
-      <%= form_for :follow, url: relationships_path do |f| %>
-        <%= f.hidden_field :monitored_id, value: @user.id %>
-        <div>
-          <%= f.submit "Follow", :class => 'btn_sign_up'%>
-        </div>
-      <% end %>
-      <% else %>
-      <%= form_for :followed, url: relationship_path, method: :delete do |f| %>
-        <%= f.hidden_field :id, value: @followed.id %>
-        <div>
-          <%= f.submit "Unfollow", :class => 'btn_sign_up'%>
-        </div>
-      <% end %>
-      <%end%>
+        <%= render "statuses/follow_form" %>
       <% end %>
 
     </div>
