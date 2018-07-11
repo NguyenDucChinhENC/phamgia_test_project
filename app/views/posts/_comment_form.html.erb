@@ -2,8 +2,8 @@
   <div class="comment-wrap">
             <%= form_for :comment, url: comments_path, remote: true do |f| %>
                 <%= f.hidden_field :post_id, value: @post[:id] %>
-                <%= f.text_area :body, class: "textarea", placeholder: "Add comment..., enter to complete.", cols: "30", id: "comment-box", rows: "3" %>
-                <%= f.submit "Follow", :class => 'btn_sign_up'%>
+                <%= f.text_area :body, class: "textarea", placeholder: "Add comment..., enter to complete.", cols: "40", id: "comment-box", rows: "3" %>
+                <%= f.submit "Sent", :class => 'btn_sign_up'%>
                 <%end%>
           </div>
       <hr>
