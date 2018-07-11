@@ -11,7 +11,10 @@ class PostsController < ApplicationController
             @posts.push post_serializer post
           end
         end
+        @posts.reverse!
       end
+    else
+      redirect_to new_user_session_path
     end
   end
 
@@ -22,6 +25,7 @@ class PostsController < ApplicationController
   	if user_signed_in?
   		post = current_user.posts.new post_params
   		if post.save
+        redirect_to post
   		end 
   	end
   end
@@ -35,6 +39,7 @@ class PostsController < ApplicationController
       comments.each do |cmt|
         @comments_serializer.push comment_serializer cmt
       end
+      @comments_serializer ? @comments_serializer.reverse! : byebug
   	else
       redirect_to root_path
     end
